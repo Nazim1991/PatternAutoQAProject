@@ -13,27 +13,28 @@ public class DataGenerator {
     }
 
     public static String generateDate(int shift) {
+        return  LocalDate.now().plusDays(shift).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         // TODO: добавить логику для объявления переменной date и задания её значения, для генерации строки с датой
         // Вы можете использовать класс LocalDate и его методы для получения и форматирования даты
-        return date;
     }
 
-    public static String generateCity(Faker faker) {
+    public static String generateCity() {
+        String[] cities = new String[]{"Майкоп", "Горно-Алтайск", "Уфа", "Улан-Удэ", "Махачкала", "Магас", "Нальчик"};
+        return cities[new Random().nextInt(cities.length)];
         // TODO: добавить логику для объявления переменной city и задания её значения, генерацию можно выполнить
         // с помощью Faker, либо используя массив валидных городов и класс Random
-        return city;
     }
 
     public static String generateName(Faker faker) {
+        return faker.name().lastName() + " " + faker.name().lastName();
         // TODO: добавить логику для объявления переменной name и задания её значения, для генерации можно
         // использовать Faker
-        return name;
     }
 
     public static String generatePhone(Faker faker) {
+        return faker.phoneNumber().phoneNumber();
         // TODO: добавить логику для объявления переменной phone и задания её значения, для генерации можно
         // использовать Faker
-        return phone;
     }
 
     public static class Registration {
@@ -44,9 +45,9 @@ public class DataGenerator {
 
         public static UserInfo generateUser(String locale) {
             faker = new Faker(new Locale(locale));
+            return new UserInfo(generateCity(), generateName(faker), generatePhone(faker));
             // TODO: добавить логику для создания пользователя user с использованием методов generateCity(faker),
             // generateName(faker), generatePhone(faker)
-            return user;
         }
     }
 
